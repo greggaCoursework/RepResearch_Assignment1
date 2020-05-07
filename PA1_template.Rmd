@@ -1,6 +1,14 @@
---title: PA1_assignment
---author: Gregg Abramovich
---output: html_document
+---
+title: "PA1_template.RMD"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+##title: PA1_assignment
+##author: Gregg Abramovich
+##output: html_document
  
 
 ## Loading and preprocessing the data
@@ -46,6 +54,7 @@ totalNumberofStepsPerDay <- data.frame(totalNumberofStepsPerDay) ##convert to da
 qplot(totalNumberofStepsPerDay$steps, geom = "histogram",binwidth = 5000
       ,ylim = c(0,35),alpha=I(.6),main = "Historgram of Steps per Day",xlab = "Total # of Daily Steps"
       , ylab = "Frequency of Times Per Day"  ,colour = I("black") + stat_density(geom = "line"),col=I("red"))
+
 mean(totalNumberofStepsPerDay$steps)
 ##[1] 10766.19
 median(totalNumberofStepsPerDay$steps)
@@ -63,6 +72,7 @@ stepsPerInterval <- aggregate(activityDataSet$steps,by = list(interval = activit
 colnames(stepsPerInterval) <- c("interval", "steps") ##rename the columns
 ggplot(stepsPerInterval, aes(x=interval, y=steps)) + geom_line(color=I("black"), size=1) + labs(title="Daily Activity Pattern", x="5 minute intervals", y="Number of steps counted")
 ##2.Which 5  minute interval, on average across all the days in the dataset contains the maximum number of sets?
+
 max(stepsPerInterval$steps) ##max total of steps within those intervals
 ##[1] 206.1698
 which.max(stepsPerInterval$steps) ##this is the 104th record
@@ -138,3 +148,7 @@ activityDataSetFilled2$Day <- c('weekend', 'weekday')[(weekdays(activityDataSetF
 
 sInt = aggregate(steps ~ interval + Day, activityDataSetFilled2, mean)
 xyplot(steps ~ interval | factor(Day), data = sInt, aspect = 1/2,  type = "l")
+
+
+
+
