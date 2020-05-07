@@ -47,6 +47,8 @@ qplot(totalNumberofStepsPerDay$steps, geom = "histogram",binwidth = 5000
       ,ylim = c(0,35),alpha=I(.6),main = "Historgram of Steps per Day",xlab = "Total # of Daily Steps"
       , ylab = "Frequency of Times Per Day"  ,colour = I("black") + stat_density(geom = "line"),col=I("red"))
 
+
+
 mean(totalNumberofStepsPerDay$steps)
 ##[1] 10766.19
 median(totalNumberofStepsPerDay$steps)
@@ -64,6 +66,9 @@ stepsPerInterval <- aggregate(activityDataSet$steps,by = list(interval = activit
 colnames(stepsPerInterval) <- c("interval", "steps") ##rename the columns
 ggplot(stepsPerInterval, aes(x=interval, y=steps)) + geom_line(color=I("black"), size=1) + labs(title="Daily Activity Pattern", x="5 minute intervals", y="Number of steps counted")
 ##2.Which 5  minute interval, on average across all the days in the dataset contains the maximum number of sets?
+
+
+
 
 max(stepsPerInterval$steps) ##max total of steps within those intervals
 ##[1] 206.1698
@@ -118,6 +123,10 @@ sum(is.na(activityDataSetFilled$steps))
 totalStepsPerDayFilled <- aggregate(steps ~ date, activityDataSetFilled, sum)
 totalStepsPerDayFilled <- data.frame(totalStepsPerDayFilled) ##convert to data frame for graphing package
 hist(totalStepsPerDayFilled$steps, xlab = "Total of Steps per Day", main = "Histogram of Steps per Day")
+
+
+
+
 ##Now report mean and median total number of steps per day. Do these values differ from estimates from first part of the assignment?
 ##What is the inpact of inputting the missing data on the estimates of the total daily number of steps?
 mean(totalStepsPerDayFilled$steps)
