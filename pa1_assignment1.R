@@ -1,7 +1,10 @@
-##title: PA1_assignment
-##author: Gregg Abramovich
-##output: html_document
- 
+## title: PA1_assignment
+## author: Gregg Abramovich
+## output: html_document
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 ## Loading and preprocessing the data
 setwd ("C:/Users/gregg/Desktop/R_coursework")
@@ -14,80 +17,86 @@ library(knitr)
 library(plyr)
 library(lattice)
 
-##*When writing code chunks in the R markdown document, always use echo = TRUE so that someone else will be able to read the code.
-##*set up the global options once in the first code chunk in a document
-opts_chunk$set(echo = TRUE, results = 'hold') ##set globally
+### When writing code chunks in the R markdown document, always use echo = TRUE so that someone else will be able to read the code.
+### set up the global options once in the first code chunk in a document
+
 activityDataSet = read.csv("activity.csv")
 
-##*variables:
+### variables:
 
-##*steps: Number of steps taking in a 5-minute interval (missing values are coded as NA)
-##*date: The date on which the measurement was taken in YYYY-MM-DD format
-##*interval: Identifier for the 5-minute interval in which measurement was taken
-##*need to make sure the date variable is converted to the date datatype
+### steps: Number of steps taking in a 5-minute interval (missing values are coded as NA)
+### date: The date on which the measurement was taken in YYYY-MM-DD format
+### interval: Identifier for the 5-minute interval in which measurement was taken
+### need to make sure the date variable is converted to the date datatype
 
 activityDataSet$date <- as.Date(activityDataSet$date) 
 str(activityDataSet)
-##*'data.frame':	17568 obs. of  3 variables:
-##* $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
-##* $ date    : Date, format: "2012-10-01" "2012-10-01" "2012-10-01" "2012-10-01" ...
-##* $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
-##* date is now of datatype date
-####################
+
+### 'data.frame':	17568 obs. of  3 variables:
+### $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
+### $ date    : Date, format: "2012-10-01" "2012-10-01" "2012-10-01" "2012-10-01" ...
+### $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+### date is now of datatype date
 
 ## What is mean total number of steps taken per day?
 totalNumberofStepsPerDay <- aggregate(steps ~ date, activityDataSet, sum) 
-##*Splits the data into subsets, computes summary statistics for each, and returns the result in a convenient form.
-##*Looks like Date, format: "2012-10-02" "2012-10-03"...
-##*steps int 126 11352..
+
+### Splits the data into subsets, computes summary statistics for each, and returns the result in a convenient form.
+### Looks like Date, format: "2012-10-02" "2012-10-03"...
+### steps int 126 11352..
+
 totalNumberofStepsPerDay <- data.frame(totalNumberofStepsPerDay) ##convert to data.frame for graphing package  
-##*histogram output
-##histogram of total number of steps taken per day
+
+## Histogram output
+### histogram of total number of steps taken per day
 qplot(totalNumberofStepsPerDay$steps, geom = "histogram",binwidth = 5000
       ,ylim = c(0,35),alpha=I(.6),main = "Historgram of Steps per Day",xlab = "Total # of Daily Steps"
       , ylab = "Frequency of Times Per Day"  ,colour = I("black") + stat_density(geom = "line"),col=I("red"))
 
-
+```{r spd, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("Rplot_1.jpeg")
+```
 
 mean(totalNumberofStepsPerDay$steps)
-##[1] 10766.19
+### [1] 10766.19
 median(totalNumberofStepsPerDay$steps)
-##[1] 10765 
-####################
+### [1] 10765 
+
 
 ## What is the average daily activity pattern?
-##1.Make a time series plot(ie.type = "1") of the 5 minute interval (x-axis) and the average number of steps taken, averaged across 
-##all days (y-axis)
-##aggregate(x,by,FUN,simplify = TRUE). x an R object, by a list of grouping elements, by which subsets are grouped by,
-##FUN = a function to compute the summary stats which can be applied to all data subsets
+
+### 1.Make a time series plot(ie.type = "1") of the 5 minute interval (x-axis) and the average number of steps taken, averaged across 
+## all days (y-axis)
+## aggregate(x,by,FUN,simplify = TRUE). x an R object, by a list of grouping elements, by which subsets are grouped by,
+## FUN = a function to compute the summary stats which can be applied to all data subsets
 stepsPerInterval <- aggregate(activityDataSet$steps,by = list(interval = activityDataSet$interval),FUN=mean, na.rm=TRUE)
-##interval: int 0 5 10 15 20...
-##x: num 1.171 0.3396 0.1321 0.1509
+## interval: int 0 5 10 15 20...
+## x: num 1.171 0.3396 0.1321 0.1509
 colnames(stepsPerInterval) <- c("interval", "steps") ##rename the columns
 ggplot(stepsPerInterval, aes(x=interval, y=steps)) + geom_line(color=I("black"), size=1) + labs(title="Daily Activity Pattern", x="5 minute intervals", y="Number of steps counted")
 ##2.Which 5  minute interval, on average across all the days in the dataset contains the maximum number of sets?
 
-
-
+```{r spi, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("Rplot_2.jpeg")
+```
 
 max(stepsPerInterval$steps) ##max total of steps within those intervals
-##[1] 206.1698
+## [1] 206.1698
 which.max(stepsPerInterval$steps) ##this is the 104th record
-##[1]104
+## [1]104
 stepsPerInterval$interval[104] ##this provides the answer, the 835th minute (interval)
-##[1] 835
-####################
+## [1] 835
 
 ## Imputing missing values
-##Note that there are a number of days/intervals where there are missing values (coded as NA). 
-##The presence of missing days may introduce bias into some calculations or summaries of the data.
-##calculate total number of missing values in the dataset
+### Note that there are a number of days/intervals where there are missing values (coded as NA). 
+###  The presence of missing days may introduce bias into some calculations or summaries of the data.
+### calculate total number of missing values in the dataset
 missingVals <- sum(is.na(activityDataSet$steps))
-##[1] 2304
-##Devise a strategy for filling in all of the missing values in the dataset.
-##The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
-## Function that calculates mean steps for a each interval. if you recall it is calling stepsperinterval which did 
-##a calculation of the mean for each interval (please see above):
+### [1] 2304
+## Devise a strategy for filling in all of the missing values in the dataset.
+### The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
+###  Function that calculates mean steps for a each interval. if you recall it is calling stepsperinterval which did 
+###  a calculation of the mean for each interval (please see above):
 
 getMeanStepsPerInterval <- function(interval){
   stepsPerInterval[stepsPerInterval$interval==interval,"steps"]}
@@ -96,60 +105,71 @@ getMeanStepsPerInterval <- function(interval){
 activityDataSetFilled <- activityDataSet ##copy our original dataset 
 
 ## Filling the missing values with the mean for a 5-minute interval that contains N/A
-##Loop through each row of the dataset until we've gone through all rows (nrow)
-##whereever the variable 'steps' has an NA value (is.na) call the getMeanStepsPerInterval function
-##and pass 
+###  Loop through each row of the dataset until we've gone through all rows (nrow)
+### whereever the variable 'steps' has an NA value (is.na) call the getMeanStepsPerInterval function
+### and pass 
+
 rowcount = 0 
 for (i in 1:nrow(activityDataSetFilled)) { 
   if (is.na(activityDataSetFilled[i,"steps"])) {
-     activityDataSetFilled[i,"steps"] <- getMeanStepsPerInterval(activityDataSetFilled[i,"interval"])
-     rowcount = rowcount + 1
+    activityDataSetFilled[i,"steps"] <- getMeanStepsPerInterval(activityDataSetFilled[i,"interval"])
+    rowcount = rowcount + 1
   }
 }
+
 head(activityDataSet)
-##and then
+
+### and then
 head(activityDataSetFilled)
-##this shows the intervals that were NA now filled with the mean value
-##when we run rowcount the first time it gives us:
+
+### This shows the intervals that were NA now filled with the mean value
+### when we run rowcount the first time it gives us:
 sum(is.na(activityDataSet$steps))
-##[1] 2303
-##which indicates that we looped through 2303 rows
-##And if we run it again it then displays:
+
+### [1] 2303
+### which indicates that we looped through 2303 rows
+### And if we run it again it then displays:
 sum(is.na(activityDataSetFilled$steps))
-##[1] 0
-##indicating there are no further NA entries to fill in
+### [1] 0
+### indicating there are no further NA entries to fill in
 
 ## Histogram of total of steps per day, with NA's filled with mean values
 totalStepsPerDayFilled <- aggregate(steps ~ date, activityDataSetFilled, sum)
+
 totalStepsPerDayFilled <- data.frame(totalStepsPerDayFilled) ##convert to data frame for graphing package
+
 hist(totalStepsPerDayFilled$steps, xlab = "Total of Steps per Day", main = "Histogram of Steps per Day")
 
+```{r tspd, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("Rplot_3.jpeg")
+```
 
-
-
-##Now report mean and median total number of steps per day. Do these values differ from estimates from first part of the assignment?
-##What is the inpact of inputting the missing data on the estimates of the total daily number of steps?
+### Now report mean and median total number of steps per day. Do these values differ from estimates from first part of the assignment?
+### What is the inpact of inputting the missing data on the estimates of the total daily number of steps?
 mean(totalStepsPerDayFilled$steps)
-##[1] 10766.19
+### [1] 10766.19
 median(totalStepsPerDayFilled$steps)
-##[1] 10766.19
-##The mean stayed the same, however the median increased. This is because the mid point in our data sample has now
-##shifted upwards, as the NA's were filled in.
-####################
+### [1] 10766.19
+### The mean stayed the same, however the median increased. This is because the mid point in our data sample has now
+### shifted upwards, as the NA's were filled in.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
 activityDataSetFilled2 <- activityDataSetFilled
-##create a vector of weekdays, this way we can create a new factor variable with 2 levels, weekend and weekday - for the given date.
+
+### create a vector of weekdays, this way we can create a new factor variable with 2 levels, weekend and weekday - for the given date.
 weekdays <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
-##Use `%in%` and `weekdays` to create a logical vector
+### Use `%in%` and `weekdays` to create a logical vector
 activityDataSetFilled2$Day <- c('weekend', 'weekday')[(weekdays(activityDataSetFilled2$date) %in% weekdays)+1]
 
-##The Pane plot showing time series of 5-minute interval and average number of steps takes, weekend versus weekdays.
+### The Pane plot showing time series of 5-minute interval and average number of steps takes, weekend versus weekdays.
 
 sInt = aggregate(steps ~ interval + Day, activityDataSetFilled2, mean)
 xyplot(steps ~ interval | factor(Day), data = sInt, aspect = 1/2,  type = "l")
+sessioninfo()
 
-
+```{r 5min, echo=FALSE, fig.cap="A caption", out.width = '100%'}
+knitr::include_graphics("Rplot_4.jpeg")
+```
 
 
