@@ -82,10 +82,10 @@ qplot(totalNumberofStepsPerDay$steps, geom = "histogram",binwidth = 5000
 
 
 ```r
-include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg")
+include_graphics("https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_1.jpeg")
 ```
 
-![](C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg)<!-- -->
+![](https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_1.jpeg)<!-- -->
 
 
 
