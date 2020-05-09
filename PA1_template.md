@@ -82,10 +82,10 @@ qplot(totalNumberofStepsPerDay$steps, geom = "histogram",binwidth = 5000
 
 
 ```r
-include_graphics("https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_1.jpeg")
+include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg")
 ```
 
-![](https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_1.jpeg)<!-- -->
+![](C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg)<!-- -->
 
 
 
@@ -125,6 +125,13 @@ ggplot(stepsPerInterval, aes(x=interval, y=steps)) + geom_line(color=I("black"),
 ```r
 ##2.Which 5  minute interval, on average across all the days in the dataset contains the maximum number of sets?
 ```
+
+
+```r
+include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_2.jpeg")
+```
+
+![](C:/Users/gregg/Desktop/R_coursework/Rplot_2.jpeg)<!-- -->
 
 
 ```r
@@ -248,6 +255,13 @@ hist(totalStepsPerDayFilled$steps, xlab = "Total of Steps per Day", main = "Hist
 
 
 ```r
+include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_3.jpeg")
+```
+
+![](C:/Users/gregg/Desktop/R_coursework/Rplot_3.jpeg)<!-- -->
+
+
+```r
 ##Now report mean and median total number of steps per day. Do these values differ from estimates from first part of the assignment?
 ##What is the inpact of inputting the missing data on the estimates of the total daily number of steps?
 mean(totalStepsPerDayFilled$steps)
@@ -288,3 +302,9 @@ xyplot(steps ~ interval | factor(Day), data = sInt, aspect = 1/2,  type = "l")
 
 ![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
+
+```r
+include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_4.jpeg")
+```
+
+![](C:/Users/gregg/Desktop/R_coursework/Rplot_4.jpeg)<!-- -->
