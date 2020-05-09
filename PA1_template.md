@@ -120,7 +120,7 @@ colnames(stepsPerInterval) <- c("interval", "steps") ##rename the columns
 ggplot(stepsPerInterval, aes(x=interval, y=steps)) + geom_line(color=I("black"), size=1) + labs(title="Daily Activity Pattern", x="5 minute intervals", y="Number of steps counted")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 ```r
 ##2.Which 5  minute interval, on average across all the days in the dataset contains the maximum number of sets?
@@ -251,7 +251,7 @@ totalStepsPerDayFilled <- data.frame(totalStepsPerDayFilled) ##convert to data f
 hist(totalStepsPerDayFilled$steps, xlab = "Total of Steps per Day", main = "Histogram of Steps per Day")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 
 ```r
@@ -300,7 +300,7 @@ sInt = aggregate(steps ~ interval + Day, activityDataSetFilled2, mean)
 xyplot(steps ~ interval | factor(Day), data = sInt, aspect = 1/2,  type = "l")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
 
 ```r
