@@ -1,7 +1,10 @@
-##title: PA1_assignment
-##author: Gregg Abramovich
-##output: html_document
- 
+## title: PA1_assignment
+## author: Gregg Abramovich
+## output: html_document
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 ## Loading and preprocessing the data
 setwd ("C:/Users/gregg/Desktop/R_coursework")
@@ -14,40 +17,43 @@ library(knitr)
 library(plyr)
 library(lattice)
 
-##*When writing code chunks in the R markdown document, always use echo = TRUE so that someone else will be able to read the code.
-##*set up the global options once in the first code chunk in a document
-opts_chunk$set(echo = TRUE, results = 'hold') ##set globally
+### When writing code chunks in the R markdown document, always use echo = TRUE so that someone else will be able to read the code.
+### set up the global options once in the first code chunk in a document
+
 activityDataSet = read.csv("activity.csv")
 
-##*variables:
+### variables:
 
-##*steps: Number of steps taking in a 5-minute interval (missing values are coded as NA)
-##*date: The date on which the measurement was taken in YYYY-MM-DD format
-##*interval: Identifier for the 5-minute interval in which measurement was taken
-##*need to make sure the date variable is converted to the date datatype
+### steps: Number of steps taking in a 5-minute interval (missing values are coded as NA)
+### date: The date on which the measurement was taken in YYYY-MM-DD format
+### interval: Identifier for the 5-minute interval in which measurement was taken
+### need to make sure the date variable is converted to the date datatype
 
 activityDataSet$date <- as.Date(activityDataSet$date) 
 str(activityDataSet)
-##*'data.frame':	17568 obs. of  3 variables:
-##* $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
-##* $ date    : Date, format: "2012-10-01" "2012-10-01" "2012-10-01" "2012-10-01" ...
-##* $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
-##* date is now of datatype date
-####################
+
+### 'data.frame':	17568 obs. of  3 variables:
+### $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
+### $ date    : Date, format: "2012-10-01" "2012-10-01" "2012-10-01" "2012-10-01" ...
+### $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+### date is now of datatype date
 
 ## What is mean total number of steps taken per day?
 totalNumberofStepsPerDay <- aggregate(steps ~ date, activityDataSet, sum) 
-##*Splits the data into subsets, computes summary statistics for each, and returns the result in a convenient form.
-##*Looks like Date, format: "2012-10-02" "2012-10-03"...
-##*steps int 126 11352..
+
+### Splits the data into subsets, computes summary statistics for each, and returns the result in a convenient form.
+### Looks like Date, format: "2012-10-02" "2012-10-03"...
+### steps int 126 11352..
+
 totalNumberofStepsPerDay <- data.frame(totalNumberofStepsPerDay) ##convert to data.frame for graphing package  
-##*histogram output
-##histogram of total number of steps taken per day
+
+## Histogram output
+### histogram of total number of steps taken per day
 qplot(totalNumberofStepsPerDay$steps, geom = "histogram",binwidth = 5000
       ,ylim = c(0,35),alpha=I(.6),main = "Historgram of Steps per Day",xlab = "Total # of Daily Steps"
       , ylab = "Frequency of Times Per Day"  ,colour = I("black") + stat_density(geom = "line"),col=I("red"))
-![alt text](https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_1.jpeg)
 
+knitr::include_graphics("https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_1.jpeg")
 
 mean(totalNumberofStepsPerDay$steps)
 ##[1] 10766.19
@@ -67,7 +73,7 @@ colnames(stepsPerInterval) <- c("interval", "steps") ##rename the columns
 ggplot(stepsPerInterval, aes(x=interval, y=steps)) + geom_line(color=I("black"), size=1) + labs(title="Daily Activity Pattern", x="5 minute intervals", y="Number of steps counted")
 ##2.Which 5  minute interval, on average across all the days in the dataset contains the maximum number of sets?
 
-![alt text](https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_2.jpeg)
+
 
 
 max(stepsPerInterval$steps) ##max total of steps within those intervals
@@ -123,7 +129,7 @@ sum(is.na(activityDataSetFilled$steps))
 totalStepsPerDayFilled <- aggregate(steps ~ date, activityDataSetFilled, sum)
 totalStepsPerDayFilled <- data.frame(totalStepsPerDayFilled) ##convert to data frame for graphing package
 hist(totalStepsPerDayFilled$steps, xlab = "Total of Steps per Day", main = "Histogram of Steps per Day")
-![alt text](https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_3.jpeg)
+
 
 
 
@@ -149,8 +155,7 @@ activityDataSetFilled2$Day <- c('weekend', 'weekday')[(weekdays(activityDataSetF
 
 sInt = aggregate(steps ~ interval + Day, activityDataSetFilled2, mean)
 xyplot(steps ~ interval | factor(Day), data = sInt, aspect = 1/2,  type = "l")
-![alt text](https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_4.jpeg)
-
+sessioninfo()
 
 
 
