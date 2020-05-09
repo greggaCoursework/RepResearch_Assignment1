@@ -28,7 +28,6 @@ library(lattice)
 library(rmarkdown)
 ## When writing code chunks in the R markdown document, always use echo = TRUE so that someone else will be able to ## read the code. set up the global options once in the first code chunk in a document
 ```
-
 ```{R}
 activityDataSet = read.csv("activity.csv")
 ## variables:
@@ -37,30 +36,25 @@ activityDataSet = read.csv("activity.csv")
 ## interval: Identifier for the 5-minute interval in which measurement was taken
 ## need to make sure the date variable is converted to the date datatype
 ```
-
 ```{R}
 activityDataSet$date <- as.Date(activityDataSet$date) 
 str(activityDataSet)
 ## What is mean total number of steps taken per day?
 ```
-
 ```{R}
 totalNumberofStepsPerDay <- aggregate(steps ~ date, activityDataSet, sum) 
 totalNumberofStepsPerDay <- data.frame(totalNumberofStepsPerDay) ##convert to data.frame for graphing package
 ```
 ## Histogram output
-
 ### histogram of total number of steps taken per day
 ```{R}
 qplot(totalNumberofStepsPerDay$steps, geom = "histogram",binwidth = 5000
       ,ylim = c(0,35),alpha=I(.6),main = "Historgram of Steps per Day",xlab = "Total # of Daily Steps"
       , ylab = "Frequency of Times Per Day"  ,colour = I("black") + stat_density(geom = "line"),col=I("red"))
 ```
-
 ```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics('C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg')
+knitr::include_graphics('https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_1.jpeg')
 ```
-
 ```{R}
 mean(totalNumberofStepsPerDay$steps)
 ##[1] 10766.19
@@ -78,11 +72,9 @@ colnames(stepsPerInterval) <- c("interval", "steps") ##rename the columns
 ggplot(stepsPerInterval, aes(x=interval, y=steps)) + geom_line(color=I("black"), size=1) + labs(title="Daily Activity Pattern", x="5 minute intervals", y="Number of steps counted")
 ##2.Which 5  minute interval, on average across all the days in the dataset contains the maximum number of sets?
 ```
-
 ```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics('C:/Users/gregg/Desktop/R_coursework/Rplot_2.jpeg')
+knitr::include_graphics('https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_2.jpeg')
 ```
-
 ```{R}
 max(stepsPerInterval$steps) ##max total of steps within those intervals
 ##[1] 206.1698
@@ -130,18 +122,15 @@ sum(is.na(activityDataSetFilled$steps))
 ##[1] 0
 ##indicating there are no further NA entries to fill in
 ```
-
 ## Histogram of total of steps per day, with NA's filled with mean values
 ```{R}
 totalStepsPerDayFilled <- aggregate(steps ~ date, activityDataSetFilled, sum)
 totalStepsPerDayFilled <- data.frame(totalStepsPerDayFilled) ##convert to data frame for graphing package
 hist(totalStepsPerDayFilled$steps, xlab = "Total of Steps per Day", main = "Histogram of Steps per Day")
 ```
-
 ```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics('C:/Users/gregg/Desktop/R_coursework/Rplot_3.jpeg')
+knitr::include_graphics('https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_3.jpeg')
 ```
-
 ```{R}
 ##Now report mean and median total number of steps per day. Do these values differ from estimates from first part of the assignment?
 ##What is the inpact of inputting the missing data on the estimates of the total daily number of steps?
@@ -158,15 +147,12 @@ weekdays <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
 ##Use `%in%` and `weekdays` to create a logical vector
 activityDataSetFilled2$Day <- c('weekend', 'weekday')[(weekdays(activityDataSetFilled2$date) %in% weekdays)+1]
 ```
-
 ## The Pane plot showing time series of 5-minute interval and average number of steps takes, weekend versus weekdays.
-
 ```{R}
 sInt = aggregate(steps ~ interval + Day, activityDataSetFilled2, mean)
 xyplot(steps ~ interval | factor(Day), data = sInt, aspect = 1/2,  type = "l")
 
 ``` 
-
 ```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics('C:/Users/gregg/Desktop/R_coursework/Rplot_4.jpeg')
+knitr::include_graphics('https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_4.jpeg')
 ```

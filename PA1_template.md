@@ -36,7 +36,6 @@ library(rmarkdown)
 ## When writing code chunks in the R markdown document, always use echo = TRUE so that someone else will be able to ## read the code. set up the global options once in the first code chunk in a document
 ```
 
-
 ```r
 activityDataSet = read.csv("activity.csv")
 ## variables:
@@ -45,7 +44,6 @@ activityDataSet = read.csv("activity.csv")
 ## interval: Identifier for the 5-minute interval in which measurement was taken
 ## need to make sure the date variable is converted to the date datatype
 ```
-
 
 ```r
 activityDataSet$date <- as.Date(activityDataSet$date) 
@@ -63,13 +61,11 @@ str(activityDataSet)
 ## What is mean total number of steps taken per day?
 ```
 
-
 ```r
 totalNumberofStepsPerDay <- aggregate(steps ~ date, activityDataSet, sum) 
 totalNumberofStepsPerDay <- data.frame(totalNumberofStepsPerDay) ##convert to data.frame for graphing package
 ```
 ## Histogram output
-
 ### histogram of total number of steps taken per day
 
 ```r
@@ -79,9 +75,7 @@ qplot(totalNumberofStepsPerDay$steps, geom = "histogram",binwidth = 5000
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
-
-<img src="C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg" width="100%" />
-
+<img src="https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_1.jpeg" width="100%" />
 
 ```r
 mean(totalNumberofStepsPerDay$steps)
@@ -119,9 +113,7 @@ ggplot(stepsPerInterval, aes(x=interval, y=steps)) + geom_line(color=I("black"),
 ```r
 ##2.Which 5  minute interval, on average across all the days in the dataset contains the maximum number of sets?
 ```
-
-<img src="C:/Users/gregg/Desktop/R_coursework/Rplot_2.jpeg" width="100%" />
-
+<img src="https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_2.jpeg" width="100%" />
 
 ```r
 max(stepsPerInterval$steps) ##max total of steps within those intervals
@@ -231,7 +223,6 @@ sum(is.na(activityDataSetFilled$steps))
 ##[1] 0
 ##indicating there are no further NA entries to fill in
 ```
-
 ## Histogram of total of steps per day, with NA's filled with mean values
 
 ```r
@@ -241,9 +232,7 @@ hist(totalStepsPerDayFilled$steps, xlab = "Total of Steps per Day", main = "Hist
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
-
-<img src="C:/Users/gregg/Desktop/R_coursework/Rplot_3.jpeg" width="100%" />
-
+<img src="https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_3.jpeg" width="100%" />
 
 ```r
 ##Now report mean and median total number of steps per day. Do these values differ from estimates from first part of the assignment?
@@ -275,9 +264,7 @@ weekdays <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
 ##Use `%in%` and `weekdays` to create a logical vector
 activityDataSetFilled2$Day <- c('weekend', 'weekday')[(weekdays(activityDataSetFilled2$date) %in% weekdays)+1]
 ```
-
 ## The Pane plot showing time series of 5-minute interval and average number of steps takes, weekend versus weekdays.
-
 
 ```r
 sInt = aggregate(steps ~ interval + Day, activityDataSetFilled2, mean)
@@ -285,5 +272,4 @@ xyplot(steps ~ interval | factor(Day), data = sInt, aspect = 1/2,  type = "l")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
-
-<img src="C:/Users/gregg/Desktop/R_coursework/Rplot_4.jpeg" width="100%" />
+<img src="https://github.com/greggaCoursework/RepResearch_Assignment1/blob/master/Rplot_4.jpeg" width="100%" />
