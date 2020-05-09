@@ -80,13 +80,7 @@ qplot(totalNumberofStepsPerDay$steps, geom = "histogram",binwidth = 5000
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
-
-```r
-include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg")
-```
-
-![](C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg)<!-- -->
-
+<img src="C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg" width="100%" />
 
 
 ```r
@@ -126,12 +120,7 @@ ggplot(stepsPerInterval, aes(x=interval, y=steps)) + geom_line(color=I("black"),
 ##2.Which 5  minute interval, on average across all the days in the dataset contains the maximum number of sets?
 ```
 
-
-```r
-include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_2.jpeg")
-```
-
-![](C:/Users/gregg/Desktop/R_coursework/Rplot_2.jpeg)<!-- -->
+<img src="C:/Users/gregg/Desktop/R_coursework/Rplot_2.jpeg" width="100%" />
 
 
 ```r
@@ -253,12 +242,7 @@ hist(totalStepsPerDayFilled$steps, xlab = "Total of Steps per Day", main = "Hist
 
 ![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
-
-```r
-include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_3.jpeg")
-```
-
-![](C:/Users/gregg/Desktop/R_coursework/Rplot_3.jpeg)<!-- -->
+<img src="C:/Users/gregg/Desktop/R_coursework/Rplot_3.jpeg" width="100%" />
 
 
 ```r
@@ -302,9 +286,4 @@ xyplot(steps ~ interval | factor(Day), data = sInt, aspect = 1/2,  type = "l")
 
 ![](PA1_template_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
-
-```r
-include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_4.jpeg")
-```
-
-![](C:/Users/gregg/Desktop/R_coursework/Rplot_4.jpeg)<!-- -->
+<img src="C:/Users/gregg/Desktop/R_coursework/Rplot_4.jpeg" width="100%" />

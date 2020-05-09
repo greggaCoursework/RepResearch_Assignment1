@@ -57,10 +57,9 @@ qplot(totalNumberofStepsPerDay$steps, geom = "histogram",binwidth = 5000
       , ylab = "Frequency of Times Per Day"  ,colour = I("black") + stat_density(geom = "line"),col=I("red"))
 ```
 
-```{R}
-include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg")
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics('C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg')
 ```
-
 
 ```{R}
 mean(totalNumberofStepsPerDay$steps)
@@ -80,8 +79,8 @@ ggplot(stepsPerInterval, aes(x=interval, y=steps)) + geom_line(color=I("black"),
 ##2.Which 5  minute interval, on average across all the days in the dataset contains the maximum number of sets?
 ```
 
-```{R}
-include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_2.jpeg")
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics('C:/Users/gregg/Desktop/R_coursework/Rplot_2.jpeg')
 ```
 
 ```{R}
@@ -139,8 +138,8 @@ totalStepsPerDayFilled <- data.frame(totalStepsPerDayFilled) ##convert to data f
 hist(totalStepsPerDayFilled$steps, xlab = "Total of Steps per Day", main = "Histogram of Steps per Day")
 ```
 
-```{R}
-include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_3.jpeg")
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics('C:/Users/gregg/Desktop/R_coursework/Rplot_3.jpeg')
 ```
 
 ```{R}
@@ -168,6 +167,6 @@ xyplot(steps ~ interval | factor(Day), data = sInt, aspect = 1/2,  type = "l")
 
 ``` 
 
-```{R}
-include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_4.jpeg")
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics('C:/Users/gregg/Desktop/R_coursework/Rplot_4.jpeg')
 ```
