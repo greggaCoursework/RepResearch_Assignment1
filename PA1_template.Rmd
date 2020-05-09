@@ -57,6 +57,11 @@ qplot(totalNumberofStepsPerDay$steps, geom = "histogram",binwidth = 5000
       , ylab = "Frequency of Times Per Day"  ,colour = I("black") + stat_density(geom = "line"),col=I("red"))
 ```
 
+```{R image1}
+include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg")
+```
+
+
 ```{R}
 mean(totalNumberofStepsPerDay$steps)
 ##[1] 10766.19
@@ -73,6 +78,10 @@ stepsPerInterval <- aggregate(activityDataSet$steps,by = list(interval = activit
 colnames(stepsPerInterval) <- c("interval", "steps") ##rename the columns
 ggplot(stepsPerInterval, aes(x=interval, y=steps)) + geom_line(color=I("black"), size=1) + labs(title="Daily Activity Pattern", x="5 minute intervals", y="Number of steps counted")
 ##2.Which 5  minute interval, on average across all the days in the dataset contains the maximum number of sets?
+```
+
+```{R image2}
+include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_2.jpeg")
 ```
 
 ```{R}
@@ -130,6 +139,10 @@ totalStepsPerDayFilled <- data.frame(totalStepsPerDayFilled) ##convert to data f
 hist(totalStepsPerDayFilled$steps, xlab = "Total of Steps per Day", main = "Histogram of Steps per Day")
 ```
 
+```{R image3}
+include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_3.jpeg")
+```
+
 ```{R}
 ##Now report mean and median total number of steps per day. Do these values differ from estimates from first part of the assignment?
 ##What is the inpact of inputting the missing data on the estimates of the total daily number of steps?
@@ -155,3 +168,6 @@ xyplot(steps ~ interval | factor(Day), data = sInt, aspect = 1/2,  type = "l")
 
 ``` 
 
+```{R image4}
+include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_4.jpeg")
+```
