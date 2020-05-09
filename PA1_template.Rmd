@@ -1,15 +1,16 @@
 ---
-Title: PA1_assignment
-Author: Gregg Abramovich
-Output: html_document
+title: "PA1_assignment"
+output: html_document 
+keep_md: true
 ---
-# Title: PA1_assignment
-# Author: Gregg Abramovich
-# Output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+# Title: PA1_assignment
+# Author: Gregg Abramovich
+# Output: html_document
+
 ## Loading and Preprocessing the data
 ```{R}
 setwd ("C:/Users/gregg/Desktop/R_coursework")
@@ -23,6 +24,7 @@ library(ggplot2)
 library(knitr)
 library(plyr)
 library(lattice)
+library(rmarkdown)
 ## When writing code chunks in the R markdown document, always use echo = TRUE so that someone else will be able to ## read the code. set up the global options once in the first code chunk in a document
 ```
 
