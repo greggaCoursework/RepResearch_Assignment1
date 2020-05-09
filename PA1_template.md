@@ -82,6 +82,14 @@ qplot(totalNumberofStepsPerDay$steps, geom = "histogram",binwidth = 5000
 
 
 ```r
+include_graphics("C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg")
+```
+
+![](C:/Users/gregg/Desktop/R_coursework/Rplot_1.jpeg)<!-- -->
+
+
+
+```r
 mean(totalNumberofStepsPerDay$steps)
 ```
 
